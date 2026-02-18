@@ -17,6 +17,19 @@ comp-puller benchmark --property property.json
 - Lease comps: rent/SF, lease type (NNN, gross, modified gross), term
 - Market stats: avg rent, avg cap rate, vacancy rate by submarket
 
+## Input / Output
+
+**Input:**
+- CLI flags: `--submarket`, `--sf` (SF range), `--period` (lookback, e.g. "12m")
+- Benchmark mode: `--property property.json` (subject property to compare against comps)
+- Pre-authenticated browser session (Playwright storage state) for CoStar
+
+**Output:**
+- Comps JSON/CSV: `{ "address", "sale_price", "price_per_sf", "cap_rate", "sale_date", "buyer", "seller", "sqft" }`
+- Benchmark mode: subject property metrics vs comp set averages (JSON + Rich table)
+- Cached locally in SQLite (avoid re-pulling same submarket)
+- Exit code 0 on success, 1 on failure
+
 ## Stack
 - Python 3.14
 - browser-use + Playwright (for CoStar comp data)
